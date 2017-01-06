@@ -13,20 +13,16 @@ class Ship:
   MISS = '.'
   HIT = '*'
   SUNK = '#'
-  x = 0 # default value for x is 0
-  y = 0 # default value for y is 0
   orientation = "h" # by default the orientation is horizontal
   vessel = ("Patrol Boat", 2) # a tuple, by default its a Patrol Boat  
   
   
-     
-      
-  def ship_orientation(self):
-    self.orientation = input("Is it horizontal? (Y)/N: " ).lower()
-    if self.orientation =="y":
-      return "h"
-    if self.orientation == "n":
-      return "v"
+  def get_ship_orientation(self):
+    user_input = input("Is it horizontal? (Y)/N: " ).lower()
+    if user_input =="":
+      print("What is your orientation !!")
+      self.get_ship_orientation()
+    elif user_input=="y":
+      self.orientation = "h"
     else:
-      return ""
-    
+      self.orientation = "v"
