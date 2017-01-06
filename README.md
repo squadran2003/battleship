@@ -2,16 +2,23 @@
 command line version of the famous battleship game
 
 ## The clear screen method 
-  this might need changing to the below method if its being run in the console
-
+  
   ```python
+
+  # if the script is run the console change
+
+  def clear_screen(self):
+    print("\033c", end="")
+  
+  # to
 
   import os
 
-  try:
-  	os.system('cls')
-  except:
-  	os.system('clear')
+  def clear_screen(self):
+  	try:
+	  os.system('cls')
+	except:
+	  os.system('clear')
 
   ```
 
