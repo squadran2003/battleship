@@ -5,7 +5,7 @@ command line version of the famous battleship game
   
   ```python
 
-  # if the script is run the console change
+  # if the script is run in the console change
 
   def clear_screen(self):
     print("\033c", end="")
