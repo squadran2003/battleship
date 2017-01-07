@@ -11,7 +11,7 @@ class Battleship(Ship):
       # representation of the guesses
     self.player1 = Player(board=Board(), guess_board=Board())
     self.clear_screen()
-    input("Press any key to continue")
+    self.move_forward()
     self.clear_screen()
     self.player2 = Player(board=Board(), guess_board=Board())
   
@@ -49,8 +49,8 @@ class Battleship(Ship):
 
     if player.board.validate_board_input():
       player.board.get_ship_orientation()
+      player.board.vessel = ship
       if player.board.validate_board_placement():
-        player.board.vessel = ship
         player.board.assign_ship_to_board()
           
       else:
@@ -139,14 +139,14 @@ class Battleship(Ship):
     # A hit has occured remove the tuple from the occupied_spots
     opponent.board.occupied_spots.pop(board_index)  
     print("Yayy you hit a ship!!")
-    input("press any key to continue")
+    self.move_forward()
     
   
   def ship_miss(self, opponent, coords):
     # add marker to the board
     self.add_guess_markers(opponent, coords, Ship.MISS)
-    print("Yayy you missed !!")
-    input("press any key to continue")
+    print("Opps you missed !!")
+    self.move_forward()
     
   
   
@@ -273,6 +273,16 @@ class Battleship(Ship):
       self.clear_screen()
       
   
+  def move_forward(self):
+    msg = "Enter the letter c to continue ".lower()
+    user_input = input(msg)
+    if "c" not in user_input:
+      print(msg)
+      self.move_forward()
+    else:
+      pass
+    
+    
   def clear_screen(self):
     print("\033c", end="")
     
@@ -280,10 +290,10 @@ class Battleship(Ship):
   def main(self):
     self.play(self.player1)
     self.clear_screen()
-    input("Press enter to continue")
+    self.move_forward()
     self.clear_screen()
     self.play(self.player2)
-    input("Press enter to continue")
+    self.move_forward()
         
     while True:
       if len(self.player2.board.occupied_spots) == 0:
